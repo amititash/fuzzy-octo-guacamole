@@ -12,7 +12,7 @@ const UserSchema = new Schema({
     password : { type : String , require : true},
     pointsEarned : { type : Number },
     badge : { type : String },
-    email : { type : String , email : true},
+    email : { type : String},
     bio : { type : String },
     website : { type : String }
 });
