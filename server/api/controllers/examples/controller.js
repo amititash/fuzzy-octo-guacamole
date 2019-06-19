@@ -2,6 +2,7 @@ import ExamplesService from '../../services/examples.service';
 
 export class Controller {
   all(req, res) {
+    console.log("get all was exec");
     ExamplesService.all().then(r => res.json(r));
   }
 

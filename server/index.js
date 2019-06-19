@@ -1,4 +1,5 @@
 import './common/env';
+require('../db');
 import Server from './common/server';
 import routes from './routes';
 
