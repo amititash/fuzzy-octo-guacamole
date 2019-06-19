@@ -8,11 +8,11 @@ const UserSchema = new Schema({
     locale : { type : String },
     gender : { type : String },
     profilePic : { type : String },
-    username : { type : String },
-    password : { type : String },
+    username : { type : String , required : true},
+    password : { type : String , require : true},
     pointsEarned : { type : Number },
     badge : { type : String },
-    email : { type : String },
+    email : { type : String , email : true},
     bio : { type : String },
     website : { type : String }
 });

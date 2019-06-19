@@ -1,15 +1,15 @@
-import StoriesService from '../../services/stories.service';
+import KosService from '../../services/kos.service';
 
 
 export class Controller {
   
 
 
-  getStory(req, res) {
+  getKo(req, res) {
     let criteria = {
       _id : req.query.id
     }
-    StoriesService.getStory(criteria)
+    KosService.getKo(criteria)
       .then ( r => {
         res
           .status(200)
@@ -19,7 +19,7 @@ export class Controller {
   }
 
 
-  updateStory( req, res ) {
+  updateKo( req, res ) {
     let criteria = {
       _id : req.body.id
     }
@@ -32,7 +32,7 @@ export class Controller {
       upsert : true,
       new : true
     }
-    StoriesService.updateStory(criteria, updateObj, options)
+    KosService.updateKo(criteria, updateObj, options)
       .then ( r => {
         res
           .status(200)
@@ -41,11 +41,11 @@ export class Controller {
   }
 
 
-  deleteStory( req, res) {
+  deleteKo( req, res) {
     let _criteria = {
       _id : req.query.id
     }
-    StoriesService.deleteStory(_criteria)
+    KosService.deleteKo(_criteria)
       .then ( r => {
         res
           .status(200)
@@ -53,8 +53,8 @@ export class Controller {
       })
   }
 
-  createStory(req, res) {
-    StoriesService.createStory(req.body).then(r =>
+  createKo(req, res) {
+    KosService.createKo(req.body).then(r =>
       res
         .status(201)
         .json(r)

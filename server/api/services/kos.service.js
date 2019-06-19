@@ -1,28 +1,28 @@
 import l from '../../common/logger';
-import db from './stories.db.service';
+import db from './kos.db.service';
 
-class StoriesService {
+class KosService {
   
 
-  updateStory(criteria, projection, options) {
+  updateKo(criteria, projection, options) {
     return db.updateOne(criteria,projection, options);
   }
 
-  getStory(criteria, projection, options) {
+  getKo(criteria, projection, options) {
     return db.findOne(criteria, projection, options);
   }
 
-  getAllStories(criteria, projection, options) {
+  getAllKos(criteria, projection, options) {
     return db.findAll(criteria, projection, options);
   }
 
-  deleteStory(criteria, projection, options) {
+  deleteKo(criteria, projection, options) {
     return db.deleteOne(criteria, projection, options);
   }
 
-  createStory(objToSave) {
+  createKo(objToSave) {
     return db.insertOne(objToSave);
   }
 }
 
-export default new StoriesService();
+export default new KosService();

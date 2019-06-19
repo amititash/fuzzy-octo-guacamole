@@ -1,21 +1,21 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const StorySchema = new Schema({
-    title : { type : String },
+const KoSchema = new Schema({
+    title : { type : String, required : true },
     type : {
         type : String,
         enum : ['idea', 'knowledge', 'news', 'info'],
-        default : 'idea'
+        required : true
     },
     url : { type : String },
-    details : { type : String },
+    details : { type : String, required : true },
     video : { type : String },
     audio : { type : String },
     image : { type : String },
-    owner : { type : String },
+    owner : { type : String ,required : true},
     category : { type : String },
     tags : [{type : String}]
 });
 
-module.exports = mongoose.model("Story", StorySchema);
+module.exports = mongoose.model("Ko", KoSchema);

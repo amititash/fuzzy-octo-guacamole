@@ -79,7 +79,7 @@ paths:
           description: Returns all examples
           content: {}
   
-  /stories:
+  /kos:
     post:
       tags:
       - Examples
@@ -89,7 +89,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/StoryBody'
+              $ref: '#/components/schemas/KoBody'
         required: true
       responses:
         200:
@@ -135,7 +135,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/StoryPatchBody'
+              $ref: '#/components/schemas/KoPatchBody'
         required: true
       responses:
         200:
@@ -232,8 +232,8 @@ components:
         id:
           type: string
 
-    StoryPatchBody:
-      title: story
+    KoPatchBody:
+      title: ko
       required:
       - id
       type: object
@@ -241,8 +241,8 @@ components:
         id:
           type: string
     
-    StoryBody:
-      title: story
+    KoBody:
+      title: ko
       required:
       - title
       - type
