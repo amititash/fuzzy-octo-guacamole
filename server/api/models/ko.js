@@ -5,7 +5,7 @@ const KoSchema = new Schema({
     title : { type : String, required : true },
     type : {
         type : String,
-        enum : ['idea', 'knowledge', 'news', 'info'],
+        enum : ['idea', 'knowledge', 'news', 'info' , 'deepdive'],
         required : true
     },
     url : { type : String },
