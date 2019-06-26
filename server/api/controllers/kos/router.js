@@ -3,8 +3,8 @@ import controller from './controller';
 
 export default express
   .Router()
-  .post('/createKo', controller.createKo)
-  .get('/', controller.getKo)
-  .get('/allkos', controller.getAllKos)
+  .post('/', controller.createKo)
+  // .get('/', controller.getKo)
+  .get('/', controller.getAllKos)
   .delete('/', controller.deleteKo)
   .patch('/', controller.updateKo)

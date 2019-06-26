@@ -9,7 +9,13 @@ const KoSchema = new Schema({
         required : true
     },
     url : { type : String },
-    details : { type : String, required : true },
+    details : [
+        {
+            _id : false,
+            question : { type : String },
+            answer : { type : String }
+        }
+    ],
     video : { type : String },
     audio : { type : String },
     image : { type : String },

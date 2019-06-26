@@ -99,7 +99,7 @@ paths:
 
 
 
-  /kos/createKo:
+  /kos:
     post:
       tags:
       - Examples
@@ -120,7 +120,7 @@ paths:
       - Examples
       description: Fetch all examples
       parameters:
-        - name: id
+        - name: emailId
           in: query
           description: The id of the example to retrieve
           required: true
