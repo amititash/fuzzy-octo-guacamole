@@ -5,7 +5,7 @@ export class Controller {
   
   getAllKos( req, res ) {
     let criteria = {
-      owner : req.query.emailId
+      ideaOwner : req.query.emailId
     }
     KosService.getAllKos(criteria)
       .then ( r => {
@@ -16,7 +16,7 @@ export class Controller {
       .catch ( e => {
         res 
           .status(500)
-          .json( { error : true });
+          .json( { error : e });
       })
   }
 
@@ -33,7 +33,7 @@ export class Controller {
       .catch ( e => {
         res 
           .status(500)
-          .json( { error : true });
+          .json( { error : e });
       })
     
   }
@@ -41,7 +41,7 @@ export class Controller {
 
   updateKo( req, res ) {
     let criteria = {
-      _id : req.body.id
+      // _id : req.body.id
     }
     let updateObj = {
       "$set" : {
@@ -61,7 +61,7 @@ export class Controller {
       .catch ( e => {
         res 
           .status(500)
-          .json( { error : true });
+          .json( { error : e });
       })
   }
 
@@ -79,7 +79,7 @@ export class Controller {
       .catch ( e => {
         res 
           .status(500)
-          .json( { error : true });
+          .json( { error : e });
       })
   }
 
@@ -93,7 +93,7 @@ export class Controller {
       .catch ( e => {
         res 
           .status(500)
-          .json( { error : true });
+          .json( { error : e });
       })
   }
 }

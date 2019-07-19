@@ -232,7 +232,7 @@ components:
       title: user
       required:
       - username
-      - password
+      # - password
       - email
       type: object
       properties:
@@ -263,11 +263,11 @@ components:
     
     KoBody:
       title: ko
-      required:
-      - title
-      - type
-      - details
-      - owner
+      # required:
+      # - title
+      # - type
+      # - details
+      # - owner
       type: object
       properties:
         title:

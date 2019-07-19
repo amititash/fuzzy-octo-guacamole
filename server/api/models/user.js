@@ -13,8 +13,9 @@ const UserSchema = new Schema({
     pointsEarned : { type : Number },
     badge : { type : String },
     email : { type : String},
-    bio : { type : String },
-    website : { type : String }
+    bio : { type : String }, 
+    website : { type : String },
+    organisation : { type : String }
 });
 
 module.exports = mongoose.model("User", UserSchema);
