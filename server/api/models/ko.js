@@ -23,16 +23,21 @@ KoSchema.pre('save', async function(next){
     let ideaCategories = [];
     try {
         let response = await axios.get(`${process.env.IDEA_CLASSIFIER_API_URL}:3333/predict?idea=${this.ideaDescription}`);
-        ideaCategories = response.data["PRED"][0];
+        ideaCategories = response.data["PRED"].slice(0,5);
     }
     catch(e) {
         console.log(e);
         throw e;
     }
-    this.ideaCategories = [ideaCategories.topic];
+    this.ideaCategories = [];
+    ideaCategories.forEach( ideaCategory => {
+        this.ideaCategories.push(ideaCategory.topic);
+    })
+    console.log("about to be saved", ideaCategories);
     next();
 })
 
+// there are no hooks for updates --> discuss with titash. Right now we are only creating not updating.
 
 module.exports = mongoose.model("Ko", KoSchema);
 
