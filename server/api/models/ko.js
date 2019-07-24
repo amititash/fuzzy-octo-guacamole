@@ -16,12 +16,12 @@ const KoSchema = new Schema({
     competitiveDifferentiation : [{type : String }],
     requiredSkills : [ {type : String }],
     requiredTechnology : [{type : String}],
-    freshness : [{type : String}],
+    freshness : {type : Number },
     newCategories : [{type : String}],
     userCategories : [{type : String}],
     startupSkills : [{type : String}],
     startupSize : [{type : String}],
-    fundability : [{type : String}]
+    fundability : {type : Number }
 });
 
 
@@ -66,7 +66,7 @@ KoSchema.pre('save', async function(next){
         newCategories = results[6].data["PRED"].slice(0,5);
     }
     catch(error) {
-        console.log(error);
+        console.log("Error in idea predictor api", error);
         throw error;
     }
 
@@ -81,15 +81,9 @@ KoSchema.pre('save', async function(next){
     console.log("about to be saved", ideaCategories);
 
 
-    this.freshness = [];
-    freshness.forEach( val => {
-        this.freshness.push(val.topic);
-    })
+    this.freshness = freshness[0].pred;
 
-    this.fundability = [];
-    fundability.forEach( val => {
-        this.fundability.push(val.topic);
-    })
+    this.fundability = fundability[0].pred;
 
     this.startupSize = [];
     startupSize.forEach( val => {

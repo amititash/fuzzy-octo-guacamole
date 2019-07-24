@@ -96,7 +96,49 @@ export class Controller {
           .json( { error : e });
       })
   }
+
+
+
+  async sortedKo(req, res) {
+    let criteria = {
+      ideaOwner : req.query.emailId
+    }
+    let projection = {
+
+    }
+    let options = {};
+    switch (req.query.sortBy) {
+      case "fundability":
+        options = {
+          sort : { fundability : -1 }
+        }
+        break;
+      case "freshness":
+        options = {
+          sort : { freshness : -1 }
+        }
+    }
+    try {
+      let data = await KosService.getAllKos(criteria, projection, options);
+      console.log(data);
+      res
+        .status(200)
+        .send(data);
+    }
+    catch(e) {
+      console.log(e); 
+      res
+        .status(500)
+        .send({error : e})
+    }
+    
+  }
+
+
 }
+
+
+
 
 
 export default new Controller();

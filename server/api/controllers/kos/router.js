@@ -8,3 +8,4 @@ export default express
   .get('/', controller.getAllKos)
   .delete('/', controller.deleteKo)
   .patch('/', controller.updateKo)
+  .get('/sorted', controller.sortedKo)
