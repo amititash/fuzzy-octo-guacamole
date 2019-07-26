@@ -115,7 +115,7 @@ export class Controller {
         break;
       case "freshness":
         options = {
-          sort : { freshness : -1 }
+          sort : { freshness : 1 }
         }
     }
     try {
