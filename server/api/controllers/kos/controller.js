@@ -117,6 +117,13 @@ export class Controller {
         options = {
           sort : { freshness : 1 }
         }
+        break;
+      case "recent" : 
+        options = {
+          sort : { createdAt : -1}
+        }
+        break;
+     
     }
     try {
       let data = await KosService.getAllKos(criteria, projection, options);

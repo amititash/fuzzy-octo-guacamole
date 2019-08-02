@@ -21,7 +21,8 @@ const KoSchema = new Schema({
     userCategories : [{type : String}],
     startupSkills : [{type : String}],
     startupSize : [{type : String}],
-    fundability : {type : Number }
+    fundability : {type : Number },
+    createdAt : { type : Date, default : Date.now}
 });
 
 
