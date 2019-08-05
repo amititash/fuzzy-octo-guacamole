@@ -15,7 +15,11 @@ const UserSchema = new Schema({
     email : { type : String},
     bio : { type : String }, 
     website : { type : String },
-    organisation : { type : String }
+    organisation : { type : String },
+    founderSkills : [{type : String}],
+    founderGoal : { type : String},
+    founderRole : { type : String},
+    founderConnections  : [{type : String}]
 });
 
 module.exports = mongoose.model("User", UserSchema);
