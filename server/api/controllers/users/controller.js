@@ -17,6 +17,20 @@ export class Controller {
     
   }
 
+  getUserByEmail(req, res) {
+    let criteria = {
+      email : req.query.emailId
+    }
+    console.log(criteria);
+    UsersService.getAllUsers(criteria)
+      .then ( r => {
+        res
+          .status(200)
+          .json(r);
+      })
+    
+  }
+
 
   updateUser( req, res ) {
     let criteria = {

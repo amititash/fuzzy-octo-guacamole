@@ -6,4 +6,5 @@ export default express
   .post('/', controller.createUser)
   .get('/', controller.getUser)
   .delete('/', controller.deleteUser)
-  .patch('/', controller.updateUser);
+  .patch('/', controller.updateUser)
+  .get('/byEmail', controller.getUserByEmail)

@@ -79,6 +79,22 @@ paths:
           description: Returns all examples
           content: {}
   
+  /users/byEmail:
+    get:
+      tags:
+      - Examples
+      description: Fetch all examples
+      parameters:
+        - name: emailId
+          in: query
+          description: The id of the example to retrieve
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Returns all examples
+          content: {}
 
 
 
