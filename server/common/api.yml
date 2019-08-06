@@ -80,13 +80,15 @@ paths:
           content: {}
   
 
-  /kos/allKos:
+
+
+  /kos/ko:
     get:
       tags:
       - Examples
       description: Fetch all examples
       parameters:
-        - name: emailId
+        - name: id
           in: query
           description: The id of the example to retrieve
           required: true
