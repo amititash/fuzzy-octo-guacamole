@@ -7,6 +7,12 @@ export class Controller {
     let criteria = {
       ideaOwner : req.query.emailId
     }
+
+    if(req.query.keyword) {
+      criteria["$text"] = {
+        "$search" : req.query.keyword
+      }
+    }
     KosService.getAllKos(criteria)
       .then ( r => {
         res

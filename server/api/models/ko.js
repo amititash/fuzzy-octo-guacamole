@@ -25,6 +25,10 @@ const KoSchema = new Schema({
     createdAt : { type : Date, default : Date.now}
 });
 
+KoSchema.index({
+    ideaDescription : "text"
+})
+
 
 KoSchema.pre('save', async function(next){
     let ideaCategories = [];
