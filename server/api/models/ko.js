@@ -10,10 +10,10 @@ const KoSchema = new Schema({
     ideaStage : { type : String , default : "idea_perceived"},
     ideaOwner : { type : String , required : true },
     targetCustomers : [ {type : String }],
-    problemsSolved : [ {type : String }],
-    newCapabilities : [ {type : String} ],    // mapped to "most innovating aspect of idea"
+    problemsSolved :  {type : String },
+    newCapabilities : {type : String},    // mapped to "most innovating aspect of idea"
     competitors : [ {type : String }],        // are there other companies that might be competitors ?
-    competitiveDifferentiation : [{type : String }],
+    competitiveDifferentiation : {type : String },
     requiredSkills : [ {type : String }],
     requiredTechnology : [{type : String}],
     freshness : {type : Number },
