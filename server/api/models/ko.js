@@ -20,9 +20,10 @@ const KoSchema = new Schema({
     newCategories : [{type : String}],
     userCategories : [{type : String}],
     startupSkills : [{type : String}],
-    startupSize : [{type : String}],
+    competitorSize : [{type : String}],
     fundability : {type : Number },
-    createdAt : { type : Date, default : Date.now}
+    createdAt : { type : Date, default : Date.now},
+    freshness_criteria : { type : String }
 });
 
 KoSchema.index({
@@ -34,7 +35,7 @@ KoSchema.pre('save', async function(next){
     let ideaCategories = [];
     let freshness = [];
     let fundability = [];
-    let startupSize = [];
+    let competitorSize = [];
     let startupSkills = [];
     let userCategories = [];
     let newCategories = [];
@@ -46,7 +47,7 @@ KoSchema.pre('save', async function(next){
     let fetchIdeaCategories = axios.get(`${process.env.IDEA_CLASSIFIER_API_URL}/categories?idea=${this.ideaDescription}`);
     let fetchFreshness = axios.get(`${process.env.IDEA_CLASSIFIER_API_URL}/freshness?idea=${this.ideaDescription}`);
     let fetchStartupSkills = axios.get(`${process.env.IDEA_CLASSIFIER_API_URL}/startup-skills?idea=${this.ideaDescription}`);
-    let fetchStartupSize = axios.get(`${process.env.IDEA_CLASSIFIER_API_URL}/size?idea=${this.ideaDescription}`);
+    let fetchCompetitorSize = axios.get(`${process.env.IDEA_CLASSIFIER_API_URL}/size?idea=${this.ideaDescription}`);
     let fetchFundability = axios.get(`${process.env.IDEA_CLASSIFIER_API_URL}/fundability?idea=${this.ideaDescription}`);
     let fetchUserCategories = axios.get(`${process.env.IDEA_CLASSIFIER_API_URL}/user-categories?idea=${this.ideaDescription}`);
     let fetchNewCategories = axios.get(`${process.env.IDEA_CLASSIFIER_API_URL}/new-categories?idea=${this.ideaDescription}`);
@@ -54,7 +55,7 @@ KoSchema.pre('save', async function(next){
     promises.push(fetchIdeaCategories);
     promises.push(fetchFreshness);
     promises.push(fetchStartupSkills);
-    promises.push(fetchStartupSize);
+    promises.push(fetchCompetitorSize);
     promises.push(fetchFundability);
     promises.push(fetchUserCategories);
     promises.push(fetchNewCategories);
@@ -62,13 +63,13 @@ KoSchema.pre('save', async function(next){
 
     try {
         let results = await Promise.all(promises);
-        ideaCategories = results[0].data["PRED"].slice(0,5);
+        ideaCategories = results[0].data["PRED"].slice(0,10);
         freshness = results[1].data["PRED"].slice(0,5);
         startupSkills = results[2].data["PRED"].slice(0,5);
-        startupSize = results[3].data["PRED"].slice(0,5);
+        competitorSize = results[3].data["PRED"].slice(0,5);
         fundability = results[4].data["PRED"].slice(0,5);
-        userCategories = results[5].data["PRED"].slice(0,5);
-        newCategories = results[6].data["PRED"].slice(0,5);
+        userCategories = results[5].data["PRED"].slice(0,10);
+        newCategories = results[6].data["PRED"].slice(0,10);
     }
     catch(error) {
         console.log("Error in idea predictor api", error);
@@ -87,12 +88,21 @@ KoSchema.pre('save', async function(next){
 
 
     this.freshness = freshness[0].pred;
+    if(freshness[0].pred < 1) {
+        this.freshness_criteria = "very_new_idea";
+    }
+    if(freshness[0].pred >=1 && freshness[0].pred <=3){
+        this.freshness_criteria = "moderately_new_idea";
+    }
+    if(freshness[0].pred > 3) {
+        this.freshness_criteria = "old_idea"
+    }
 
     this.fundability = fundability[0].pred;
 
-    this.startupSize = [];
-    startupSize.forEach( val => {
-        this.startupSize.push(val.topic);
+    this.competitorSize = [];
+    competitorSize.forEach( val => {
+        this.competitorSize.push(val.topic);
     })
 
     this.startupSkills = [];
