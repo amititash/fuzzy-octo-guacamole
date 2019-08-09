@@ -8,3 +8,4 @@ export default express
   .delete('/', controller.deleteUser)
   .patch('/', controller.updateUser)
   .get('/byEmail', controller.getUserByEmail)
+  .get('/all', controller.getAllUsers)

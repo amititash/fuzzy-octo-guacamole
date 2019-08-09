@@ -96,6 +96,16 @@ paths:
           description: Returns all examples
           content: {}
 
+  /users/all:
+    get:
+      tags:
+      - Users
+      description: Fetch all users
+      responses:
+        200:
+          description: Returns all users
+          content: {}
+
 
 
   /kos/ko:

@@ -31,6 +31,18 @@ export class Controller {
     
   }
 
+  getAllUsers(req, res) {
+    let criteria = {}
+    //console.log(criteria);
+    UsersService.getAllUsers(criteria)
+      .then ( r => {
+        res
+          .status(200)
+          .json(r);
+      })
+    
+  }
+
 
   updateUser( req, res ) {
     let criteria = {
