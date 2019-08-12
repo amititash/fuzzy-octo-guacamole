@@ -23,7 +23,9 @@ const KoSchema = new Schema({
     competitorSize : [{type : String}],
     fundability : {type : Number },
     createdAt : { type : Date, default : Date.now},
-    freshness_criteria : { type : String }
+    freshness_criteria : { type : String },
+    predictedRevenue : { type : Number},
+    topCompetitors : [{ type : Schema.ObjectId}]
 });
 
 KoSchema.index({

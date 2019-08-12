@@ -1,5 +1,5 @@
 import KosService from '../../services/kos.service';
-
+import CompanyService from '../../services/companies.service'
 
 export class Controller {
   
@@ -89,7 +89,23 @@ export class Controller {
       })
   }
 
-  createKo(req, res) {
+  async createKo(req, res) {
+    console.log("xxxxxxxxxxxx", req.body);
+    
+    let company = {};
+
+    try {
+      let companyData = {
+        name : req.body.top_competitor,
+        description : req.body.topCompetitorUserDescription
+      }
+      company = await CompanyService.createCompany(companyData);
+    }
+    catch(e){
+      console.log(e.message);
+      throw e;
+    }
+    req.body.topCompetitors = [company._id]
     KosService.createKo(req.body)
       .then(r =>
         res
