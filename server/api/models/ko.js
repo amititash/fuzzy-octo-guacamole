@@ -33,6 +33,7 @@ KoSchema.index({
 })
 
 
+
 KoSchema.pre('save', async function(next){
     let ideaCategories = [];
     let freshness = [];

@@ -20,8 +20,20 @@ class KosService {
     return db.deleteOne(criteria, projection, options);
   }
 
+  deleteAllKos(criteria, projection, options) {
+    return db.deleteMany(criteria, projection, options);
+  }
+  
   createKo(objToSave) {
     return db.insertOne(objToSave);
+  }
+
+  aggregateKos(pipeline){
+    return db.aggregateKo(pipeline);
+  }
+
+  countKo(criteria, projection, options){
+    return db.count(criteria, projection, options);
   }
 }
 

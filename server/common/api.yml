@@ -148,6 +148,63 @@ paths:
           description: Returns all examples
           content: {}
 
+  /kos/numbered:
+    get:
+      tags:
+      - Examples
+      description: Fetch all examples
+      parameters:
+        - name: emailId
+          in: query
+          description: The id of the example to retrieve
+          required: true
+          schema:
+            type: string
+        - name: sortBy
+          in: query
+          description: Criteria to sort by
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Returns all examples
+          content: {}
+  
+  /kos/count:
+    get:
+      tags:
+      - Examples
+      description: Fetch all examples
+      parameters:
+        - name: emailId
+          in: query
+          description: The id of the example to retrieve
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Returns all examples
+          content: {}
+
+  /kos/all:
+    delete:
+      tags:
+      - Examples
+      description: Fetch all examples
+      parameters:
+        - name: emailId
+          in: query
+          description: The id of the example to retrieve
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Returns all examples
+          content: {}
+
 
   /kos:
     post:
@@ -304,12 +361,12 @@ components:
 
     KoPatchBody:
       title: ko
-      required:
-      - id
-      type: object
-      properties:
-        id:
-          type: string
+      # required:
+      # - id
+      # type: object
+      # properties:
+      #   id:
+      #     type: string
     
     KoBody:
       title: ko
