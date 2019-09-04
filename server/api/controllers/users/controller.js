@@ -85,7 +85,30 @@ export class Controller {
         .json(r)
     );
   }
+
+
+  
+  async storeCreativityScore(req, res) {
+    let data = {};
+    try{
+      let response = await UsersService.storeCreativityScore(req.body);
+      data.success = true;
+      data.average = response.average;
+      res
+        .status(200)
+        .json(data);
+    }
+    catch(e){
+      res.json({
+        error : e.message
+      })
+    }
+  }
+
+
 }
+
+
 
 
 export default new Controller();

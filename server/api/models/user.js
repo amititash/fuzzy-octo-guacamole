@@ -19,6 +19,7 @@ const UserSchema = new Schema({
     founderSkills : [{type : String}],
     founderGoal : { type : String},
     founderRole : { type : String},
+    creativityScore : { type : Number },
     founderConnections  : [{type : String}]
 });
 

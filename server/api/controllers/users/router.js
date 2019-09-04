@@ -9,3 +9,4 @@ export default express
   .patch('/', controller.updateUser)
   .get('/byEmail', controller.getUserByEmail)
   .get('/all', controller.getAllUsers)
+  .post('/founderquiz/creativityScore', controller.storeCreativityScore)

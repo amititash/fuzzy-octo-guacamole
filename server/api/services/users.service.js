@@ -1,6 +1,7 @@
 import l from '../../common/logger';
 import db from './users.db.service';
 
+
 class UsersService {
   
 
@@ -22,6 +23,40 @@ class UsersService {
 
   createUser(objToSave) {
     return db.insertOne(objToSave);
+  }
+
+  storeCreativityScore(payload) {
+    return new Promise( async (resolve, reject) => {
+      let scoresArray = payload.creativityScores;
+      let numberOfData = scoresArray.length;
+      try {
+        let sum = scoresArray.reduce( (a,b) => a+b, 0);
+        let average = sum/numberOfData;
+        average = (average ? average.toFixed(2) : 0 );
+        let criteria = {
+          email : payload.emailId
+        }
+        let update = {
+          $set : {
+            creativityScore : average
+          }
+        }
+        let options = {
+          new : true,
+          upsert : true
+        }
+        let updatedUserObj = await db.updateOne(criteria, update, options);
+        console.log(updatedUserObj);
+        resolve({
+          average ,
+          updatedUserObj
+        });
+      } 
+      catch(e) {
+        console.log(e);
+        reject(e);
+      }
+    })
   }
 }
 

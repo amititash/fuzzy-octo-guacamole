@@ -96,6 +96,23 @@ paths:
           description: Returns all examples
           content: {}
 
+  /users/founderquiz/creativityScore:
+    post:
+      tags:
+      - Examples
+      description: Fetch all examples
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FounderQuizBodySchema'
+        required: true
+      responses:
+        200:
+          description: Returns all examples
+          content: {}
+
   /users/all:
     get:
       tags:
@@ -325,6 +342,21 @@ paths:
 
 components:
   schemas:
+
+    FounderQuizBodySchema:
+      title: example
+      required: 
+      - creativityScores
+      - emailId
+      type: object
+      properties:
+        creativityScores:
+          type: array
+          example: no_stress
+        emailId:
+          type: string
+          example: no_stress
+
     ExampleBody:
       title: example
       required:
