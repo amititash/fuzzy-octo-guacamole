@@ -3,6 +3,11 @@ import usersRouter from './api/controllers/users/router';
 import storiesRouter from './api/controllers/kos/router';
 
 export default function routes(app) {
+  app.get('/ping', (req, res) => {
+    res.json({
+      reply : "pong"
+    })
+  })
   app.use('/api/v1/examples' , examplesRouter);
   app.use('/api/v1/users', usersRouter);
   app.use('/api/v1/kos', storiesRouter);

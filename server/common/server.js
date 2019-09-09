@@ -36,12 +36,16 @@ export default class ExpressServer {
     }).install(app);
   }
 
+  
+
   router(routes) {
     routes(app);
     app.use(errorHandler);
 
     return this;
   }
+
+  
 
   listen(port = process.env.PORT) {
     const welcome = p => () =>
