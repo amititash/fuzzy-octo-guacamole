@@ -4,7 +4,7 @@ import storiesRouter from './api/controllers/kos/router';
 
 export default function routes(app) {
   app.get('/ping', (req, res) => {
-    res.json({
+    res.status(200).send({
       reply : "pong"
     })
   })
