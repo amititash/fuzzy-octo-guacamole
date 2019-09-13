@@ -53,7 +53,7 @@ export class Controller {
     data.forEach ( element => element.serial = numbering ++);
     res.send(data);
   }
-  
+
 
   async getKoCount(req, res) {
     let criteria = {
@@ -71,7 +71,7 @@ export class Controller {
     }
     res.send(data);
   }
-  
+
   async getAllKos( req, res ) {
     let criteria = {
       ideaOwner : req.query.emailId
@@ -93,11 +93,11 @@ export class Controller {
         element = element.toObject();
         element.serial = numbering++;
         data.push(element);
-      }) 
+      })
       res.send(data);
     }
     catch(e) {
-      res 
+      res
         .status(500)
         .json( { error : e.message });
     }
@@ -114,11 +114,11 @@ export class Controller {
           .json(r);
       })
       .catch ( e => {
-        res 
+        res
           .status(500)
           .json( { error : e });
       })
-    
+
   }
 
 
@@ -144,7 +144,7 @@ export class Controller {
       })
       .catch ( e => {
         console.log(e);
-        res 
+        res
           .status(500)
           .json( { error : e.message });
       })
@@ -162,7 +162,7 @@ export class Controller {
           .json(r);
       })
       .catch ( e => {
-        res 
+        res
           .status(500)
           .json( { error : e.message });
       })
@@ -210,7 +210,7 @@ export class Controller {
             .json(r)
         )
         .catch ( e => {
-          res 
+          res
             .status(500)
             .json( { error : e.message });
         })
@@ -239,7 +239,7 @@ export class Controller {
             .json(r)
         )
         .catch ( e => {
-          res 
+          res
             .status(500)
             .json( { error : e.message });
         })
@@ -253,7 +253,7 @@ export class Controller {
       ideaOwner : req.query.emailId,
     }
     let projection = {
-      
+
     }
     let options = {};
     switch (req.query.sortBy) {
@@ -267,12 +267,12 @@ export class Controller {
           sort : { freshness : 1 }
         }
         break;
-      case "recent" : 
+      case "recent" :
         options = {
           sort : { createdAt : -1}
         }
         break;
-     
+
     }
     try {
       let data = await KosService.getAllKos(criteria, projection, options);
@@ -282,12 +282,12 @@ export class Controller {
         .send(data);
     }
     catch(e) {
-      console.log(e); 
+      console.log(e);
       res
         .status(500)
         .send({error : e.message})
     }
-    
+
   }
 
 

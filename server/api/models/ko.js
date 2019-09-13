@@ -9,7 +9,8 @@ const KoSchema = new Schema({
     ideaCategories : [ {type : String}],
     ideaStage : { type : String , default : "idea_perceived"},
     ideaOwner : { type : String , required : true },
-    targetCustomers : [ {type : String }],
+    targetCustomer : {type : String },
+    targetSegment : { type : String },
     problemsSolved :  {type : String },
     newCapabilities : {type : String},    // mapped to "most innovating aspect of idea"
     competitors : [ {type : String }],        // are there other companies that might be competitors ?
@@ -19,12 +20,16 @@ const KoSchema = new Schema({
     freshness : {type : Number },
     newCategories : [{type : String}],
     userCategories : [{type : String}],
-    startupSkills : [{type : String}],
     competitorSize : [{type : String}],
     fundability : {type : Number },
     createdAt : { type : Date, default : Date.now},
     freshness_criteria : { type : String },
-    predictedRevenue : { type : Number},
+    top_competitor : { type : String },
+    topCompetitorUserDescription : { type : String },
+    chosenCustomerSegment : { type : String },
+    customerSize : { type : Number },
+    offeringType : {type : String },
+    totalAddressableMarket : { type : Number },
     topCompetitors : [{ type : Schema.ObjectId}]
 });
 
@@ -39,7 +44,7 @@ KoSchema.pre('save', async function(next){
     let freshness = [];
     let fundability = [];
     let competitorSize = [];
-    let startupSkills = [];
+    let requiredSkills = [];
     let userCategories = [];
     let newCategories = [];
 
@@ -49,7 +54,7 @@ KoSchema.pre('save', async function(next){
 
     let fetchIdeaCategories = axios.get(`${process.env.IDEA_CLASSIFIER_API_URL}/categories?idea=${this.ideaDescription}`);
     let fetchFreshness = axios.get(`${process.env.IDEA_CLASSIFIER_API_URL}/freshness?idea=${this.ideaDescription}`);
-    let fetchStartupSkills = axios.get(`${process.env.IDEA_CLASSIFIER_API_URL}/startup-skills?idea=${this.ideaDescription}`);
+    let fetchrequiredSkills = axios.get(`${process.env.IDEA_CLASSIFIER_API_URL}/startup-skills?idea=${this.ideaDescription}`);
     let fetchCompetitorSize = axios.get(`${process.env.IDEA_CLASSIFIER_API_URL}/size?idea=${this.ideaDescription}`);
     let fetchFundability = axios.get(`${process.env.IDEA_CLASSIFIER_API_URL}/fundability?idea=${this.ideaDescription}`);
     let fetchUserCategories = axios.get(`${process.env.IDEA_CLASSIFIER_API_URL}/user-categories?idea=${this.ideaDescription}`);
@@ -57,7 +62,7 @@ KoSchema.pre('save', async function(next){
 
     promises.push(fetchIdeaCategories);
     promises.push(fetchFreshness);
-    promises.push(fetchStartupSkills);
+    promises.push(fetchrequiredSkills);
     promises.push(fetchCompetitorSize);
     promises.push(fetchFundability);
     promises.push(fetchUserCategories);
@@ -68,7 +73,7 @@ KoSchema.pre('save', async function(next){
         let results = await Promise.all(promises);
         ideaCategories = results[0].data["PRED"].slice(0,10);
         freshness = results[1].data["PRED"].slice(0,5);
-        startupSkills = results[2].data["PRED"].slice(0,5);
+        requiredSkills = results[2].data["PRED"].slice(0,5);
         competitorSize = results[3].data["PRED"].slice(0,5);
         fundability = results[4].data["PRED"].slice(0,5);
         userCategories = results[5].data["PRED"].slice(0,10);
@@ -108,9 +113,9 @@ KoSchema.pre('save', async function(next){
         this.competitorSize.push(val.topic);
     })
 
-    this.startupSkills = [];
-    startupSkills.forEach( val => {
-        this.startupSkills.push(val.topic);
+    this.requiredSkills = [];
+    requiredSkills.forEach( val => {
+        this.requiredSkills.push(val.topic);
     })
 
     this.userCategories = [];
@@ -129,7 +134,3 @@ KoSchema.pre('save', async function(next){
 // there are no hooks for updates --> discuss with titash. Right now we are only creating not updating.
 
 module.exports = mongoose.model("Ko", KoSchema);
-
-
-
-
