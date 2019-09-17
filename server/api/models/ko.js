@@ -29,6 +29,7 @@ const KoSchema = new Schema({
     chosenCustomerSegment : { type : String },
     customerSize : { type : Number },
     offeringType : {type : String },
+    annualBurn : { type : Number },
     totalAddressableMarket : { type : Number },
     topCompetitors : [{ type : Schema.ObjectId}]
 });
