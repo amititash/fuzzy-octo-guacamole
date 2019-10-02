@@ -7,6 +7,7 @@ const KoSchema = new Schema({
     ideaName : { type : String },
     ideaDescription : { type : String , required : true},
     ideaCategories : [ {type : String}],
+    progress : { type : String , default : "section-0" },
     ideaStage : { type : String , default : "idea_perceived"},
     ideaOwner : { type : String , required : true },
     targetCustomer : {type : String },
