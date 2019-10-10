@@ -36,7 +36,8 @@ export class Controller {
         "$project" : {
           ideaDescription : 1,
           [`${requiredField}`] : 1,
-          freshness_criteria : 1
+          freshness_criteria : 1,
+          fundabilityStars : 1
         }
       }
     ];

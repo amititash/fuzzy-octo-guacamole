@@ -25,6 +25,7 @@ const KoSchema = new Schema({
     fundability : {type : Number },
     createdAt : { type : Date, default : Date.now},
     freshness_criteria : { type : String },
+    fundabilityStars : { type : String },
     top_competitor : { type : String },
     topCompetitorUserDescription : { type : String },
     chosenCustomerSegment : { type : String },
@@ -90,11 +91,9 @@ KoSchema.pre('save', async function(next){
 
 
     this.ideaCategories = [];
-    console.log(ideaCategories)
     ideaCategories.forEach( ideaCategory => {
         this.ideaCategories.push(ideaCategory.topic);
     })
-    console.log("about to be saved", ideaCategories);
 
 
     this.freshness = freshness[0].pred;
@@ -109,6 +108,24 @@ KoSchema.pre('save', async function(next){
     }
 
     this.fundability = fundability[0].pred;
+    let unscaledFundability = (Math.round(this.fundability*100)).toFixed(0);
+    let fundabilityStars = "";
+    if(unscaledFundability < 20) {
+        fundabilityStars = "⭐"
+    }
+    if(unscaledFundability >=20 && unscaledFundability <40){
+        fundabilityStars = "⭐⭐"
+    }
+    if(unscaledFundability >=40 && unscaledFundability <60){
+        fundabilityStars = "⭐⭐⭐"
+    }
+    if(unscaledFundability >=60 && unscaledFundability <80){
+        fundabilityStars = "⭐⭐⭐⭐"
+    }
+    if(unscaledFundability >=80 && unscaledFundability <100){
+        fundabilityStars = "⭐⭐⭐⭐⭐"
+    }
+    this.fundabilityStars = fundabilityStars;
 
     this.competitorSize = [];
     competitorSize.forEach( val => {
