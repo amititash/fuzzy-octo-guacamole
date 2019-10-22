@@ -50,6 +50,8 @@ KoSchema.pre('save', async function(next){
     let requiredSkills = [];
     let userCategories = [];
     let newCategories = [];
+    let businessProbability = 0;
+    let productProbability = 0;
 
 
 
@@ -62,6 +64,9 @@ KoSchema.pre('save', async function(next){
     let fetchFundability = axios.get(`${process.env.IDEA_CLASSIFIER_API_URL}/fundability?idea=${this.ideaDescription}`);
     let fetchUserCategories = axios.get(`${process.env.IDEA_CLASSIFIER_API_URL}/user-categories?idea=${this.ideaDescription}`);
     let fetchNewCategories = axios.get(`${process.env.IDEA_CLASSIFIER_API_URL}/new-categories?idea=${this.ideaDescription}`);
+    let fetchOfferingType = axios.get(`${process.env.IDEA_CLASSIFIER_API_URL}/offering-type?idea=${this.ideaDescription}`);
+    let fetchTargetSegment = axios.get(`${process.env.IDEA_CLASSIFIER_API_URL}/ideaType?idea=${this.ideaDescription}`);
+
 
     promises.push(fetchIdeaCategories);
     promises.push(fetchFreshness);
@@ -70,6 +75,8 @@ KoSchema.pre('save', async function(next){
     promises.push(fetchFundability);
     promises.push(fetchUserCategories);
     promises.push(fetchNewCategories);
+    promises.push(fetchOfferingType);
+    promises.push(fetchTargetSegment);
 
 
     try {
@@ -81,6 +88,8 @@ KoSchema.pre('save', async function(next){
         fundability = results[4].data["PRED"].slice(0,5);
         userCategories = results[5].data["PRED"].slice(0,10);
         newCategories = results[6].data["PRED"].slice(0,10);
+        businessProbability = results[7].data["PRED"][0]["pred"];
+        productProbability = results[8].data["PRED"][0]["pred"];
     }
     catch(error) {
         console.log("Error in idea predictor api", error);
@@ -147,6 +156,12 @@ KoSchema.pre('save', async function(next){
         this.newCategories.push(val.topic);
     })
 
+    let targetSegment = (businessProbability > 0.5 ? "business" : "individual consumer");
+    let offeringType = (productProbability > 0.5 ? "product" : "service");
+
+
+    this.offeringType = offeringType;
+    this.targetSegment = targetSegment;
     next();
 })
 
