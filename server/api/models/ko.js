@@ -14,13 +14,14 @@ const KoSchema = new Schema({
     targetSegment : { type : String },
     problemsSolved :  {type : String },
     newCapabilities : {type : String},    // mapped to "most innovating aspect of idea"
-    competitors : [ {type : String }],        // are there other companies that might be competitors ?
+    competitors : [ { cname : String, crel : Number }],        // are there other companies that might be competitors ?
     competitiveDifferentiation : {type : String },
     requiredSkills : [ {type : String }],
     requiredTechnology : [{type : String}],
     freshness : {type : Number },
     newCategories : [{type : String}],
-    userCategories : [{type : String}],
+    userCategory : {type : String},
+    userCoCategories: [{type : String}],
     competitorSize : [{type : String}],
     fundability : {type : Number },
     createdAt : { type : Date, default : Date.now},
