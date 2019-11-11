@@ -11,6 +11,7 @@ const KoSchema = new Schema({
     ideaStage : { type : String , default : "idea_perceived"},
     ideaOwner : { type : String , required : true },
     targetCustomer : {type : String },
+    targetCustomerDescription : { type : String },
     targetSegment : { type : String },
     problemsSolved :  {type : String },
     newCapabilities : {type : String},    // mapped to "most innovating aspect of idea"
@@ -34,7 +35,12 @@ const KoSchema = new Schema({
     offeringType : {type : String },
     annualBurn : { type : Number },
     totalAddressableMarket : { type : Number },
-    topCompetitors : [{ type : Schema.ObjectId}]
+    topCompetitors : [{ type : Schema.ObjectId}],
+    totalCosts : [{type : Number}],
+    totalCustomers : [{type : Number}],
+    annualCosts : { type : Number},
+    annualProfit : { type : Number},
+    profitToRevenueRatio : { type : Number}
 });
 
 KoSchema.index({
