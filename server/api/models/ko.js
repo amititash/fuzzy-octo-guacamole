@@ -40,7 +40,10 @@ const KoSchema = new Schema({
     totalCustomers : [{type : Number}],
     annualCosts : { type : Number},
     annualProfit : { type : Number},
-    profitToRevenueRatio : { type : Number}
+    profitToRevenueRatio : { type : Number},
+    antiSkills : [{type : String}],
+    topSkill : { type : String },
+    coSkill : { type : String }
 });
 
 KoSchema.index({
