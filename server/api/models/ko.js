@@ -15,7 +15,7 @@ const KoSchema = new Schema({
     targetSegment : { type : String },
     problemsSolved :  {type : String },
     newCapabilities : {type : String},    // mapped to "most innovating aspect of idea"
-    competitors : [ { cname : String, crel : Number }],        // are there other companies that might be competitors ?
+    competitors : [ { cname : String, crel : Number, url : String }],        // are there other companies that might be competitors ?
     competitiveDifferentiation : {type : String },
     requiredSkills : [ {type : String }],
     requiredTechnology : [{type : String}],
