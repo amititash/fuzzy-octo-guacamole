@@ -6,7 +6,7 @@ export default express
   .post('/', controller.createUser)
   .get('/', controller.getUser)
   .delete('/', controller.deleteUser)
-  .patch('/', controller.updateUser)
+  .patch('/', controller.updateUserByEmail)
   .get('/byEmail', controller.getUserByEmail)
   .get('/all', controller.getAllUsers)
   .post('/founderquiz/creativityScore', controller.storeCreativityScore)

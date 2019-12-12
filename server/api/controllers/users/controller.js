@@ -44,19 +44,22 @@ export class Controller {
   }
 
 
-  updateUser( req, res ) {
+  updateUserByEmail( req, res ) {
+
     let criteria = {
-      _id : req.body.id
+      email : req.body.emailId
     }
+
     let updateObj = {
       "$set" : {
         ...req.body
       }
     }
+
     let options = {
-      upsert : true,
       new : true
     }
+    
     UsersService.updateUser(criteria, updateObj, options)
       .then ( r => {
         res

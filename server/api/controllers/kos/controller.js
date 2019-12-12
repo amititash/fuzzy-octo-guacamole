@@ -4,6 +4,45 @@ import { resolve } from 'path';
 
 export class Controller {
 
+
+
+  async getAllSubmittedIdeas(req, res) {
+    let submittedIdeas = [];
+    let criteria = {
+      bizcompApplication : { "$exists" : true }
+    }
+    let projection = {
+
+    }
+    let options = {
+
+    }
+    try {
+      submittedIdeas = await KosService.getAllKos(criteria, projection, options);
+    }
+    catch(e) {
+      console.log(e);
+    }
+    res.send(submittedIdeas);
+  }
+
+
+  async getSubmittedIdeasCount(req, res) {
+    let criteria = {
+      ideaOwner : req.query.emailId ,
+      bizcompApplication : { "$exists" : true }
+    }
+    let numberOfSubmittedIdeas = 0;
+    try {
+      numberOfSubmittedIdeas = await KosService.countKo(criteria);
+    }
+    catch(e){
+      console.log(e);
+      res.send({ error : e.message})
+    }
+    res.send({ numberOfSubmittedIdeas });
+  }
+
   async getNumberedKos(req, res) {
     let sortBy = {};
     let requiredField = "fundability";

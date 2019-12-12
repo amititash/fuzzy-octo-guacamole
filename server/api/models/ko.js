@@ -43,7 +43,17 @@ const KoSchema = new Schema({
     profitToRevenueRatio : { type : Number},
     antiSkills : [{type : String}],
     topSkill : { type : String },
-    coSkill : { type : String }
+    coSkill : { type : String },
+    bizcompApplication : { 
+        q1 : { type : String },
+        q2 : { type : String },
+        q3 : { type : String },
+        q4 : { type : String }
+    },
+    submissionDate : { type : Date },
+    submissionBotFlowMode : { type : String }
+    
+    
 });
 
 KoSchema.index({

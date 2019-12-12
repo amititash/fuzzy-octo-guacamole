@@ -125,6 +125,34 @@ paths:
 
 
 
+  /kos/allSubmittedIdeas:
+    get:
+      tags:
+      - Examples
+      description: Fetch all examples
+      responses:
+        200:
+          description: Returns all examples
+          content: {}
+
+
+  /kos/numberOfSubmittedIdeas:
+    get:
+      tags:
+      - Examples
+      description: Fetch all examples
+      parameters:
+        - name: emailId
+          in: query
+          description: The id of the example to retrieve
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Returns all examples
+          content: {}
+
   /kos/ko:
     get:
       tags:
@@ -385,7 +413,7 @@ components:
     UserPatchBody:
       title: user
       required:
-      - id
+      - emailId
       type: object
       properties:
         id:

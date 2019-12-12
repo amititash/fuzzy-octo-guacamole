@@ -32,8 +32,8 @@ class KosService {
     return db.aggregateKo(pipeline);
   }
 
-  countKo(criteria, projection, options){
-    return db.count(criteria, projection, options);
+  countKo(criteria){
+    return db.count(criteria).exec();
   }
 }
 

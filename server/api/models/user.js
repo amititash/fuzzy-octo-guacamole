@@ -20,7 +20,22 @@ const UserSchema = new Schema({
     founderGoal : { type : String},
     founderRole : { type : String},
     creativityScore : { type : Number },
-    founderConnections  : [{type : String}]
+    founderConnections  : [{type : String}],
+    bigFivePersonalityScores : {
+        Extraversion : Number,
+        Agreeableness : Number,
+        Conscientiousness : Number,
+        Neuroticism : Number,
+        Openness : Number
+    },
+    entrepreneurEfficacyScores : {
+        Marketing : Number,
+        Innovation : Number,
+        Management : Number,
+        Risktaking : Number,
+        Financialcontrol : Number
+    },
+    botFlowMode : { type : String }
 });
 
 module.exports = mongoose.model("User", UserSchema);

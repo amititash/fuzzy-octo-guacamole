@@ -12,4 +12,5 @@ export default express
   .get('/sorted', controller.sortedKo)
   .get('/numbered', controller.getNumberedKos)
   .get('/count', controller.getKoCount)
-  
+  .get('/numberOfSubmittedIdeas', controller.getSubmittedIdeasCount)
+  .get('/allSubmittedIdeas', controller.getAllSubmittedIdeas)
