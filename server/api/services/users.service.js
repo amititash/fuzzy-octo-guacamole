@@ -1,8 +1,65 @@
 import l from '../../common/logger';
 import db from './users.db.service';
+import usersDbService from './users.db.service';
 
 
 class UsersService {
+
+
+
+
+  getBotFlowMode(payload) {
+    return new Promise( async(resolve, reject) => {
+      let botFlowMode = "";
+      let criteria = {
+        email : payload.emailId
+      }
+      let projection = {
+
+      }
+      let options = {
+
+      }
+      try {
+        let user = await usersDbService.findOne(criteria, projection, options);
+        if(!user){
+          throw new Error("No such user exists");
+        }
+        botFlowMode = user.botFlowMode;
+      }
+      catch(e) {
+        console.log(e);
+        reject(e);
+      }
+      resolve({botFlowMode : botFlowMode});
+    })
+  }
+
+
+  setBotFlowMode(payload) {
+    return new Promise( async(resolve, reject) => {
+      let criteria = {
+        email : payload.emailId
+      }
+      let updateObj = {
+        "$set" : {
+          botFlowMode : payload.botFlowMode
+        }
+      }
+      let options = {
+        new : true
+      }
+      let updatedUser = {};
+      try {
+        updatedUser = await usersDbService.updateOne(criteria, updateObj, options);
+      }
+      catch(e){
+        console.log(e);
+        reject(e);
+      }
+      resolve(updatedUser);
+    })
+  }
   
 
   updateUser(criteria, projection, options) {

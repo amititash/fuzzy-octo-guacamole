@@ -2,7 +2,34 @@ import UsersService from '../../services/users.service';
 
 
 export class Controller {
-  
+
+  async getBotFlowMode(req, res) {
+    let data = {};
+    try{
+      data = await UsersService.getBotFlowMode(req.query);
+    }
+    catch(e){
+      console.log(e);
+      res.send({
+        error : e.message
+      })
+    } 
+    res.send(data);
+  }
+
+  async setBotFlowMode(req, res) {
+    let data = {};
+    try {
+      data = await UsersService.setBotFlowMode(req.body);
+    }
+    catch(e){
+      console.log(e);
+      res.send({
+        error : e.message
+      });
+    }
+    res.send(data);
+  }
 
   getUser(req, res) {
     let criteria = {

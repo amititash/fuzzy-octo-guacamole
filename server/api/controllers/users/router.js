@@ -10,3 +10,5 @@ export default express
   .get('/byEmail', controller.getUserByEmail)
   .get('/all', controller.getAllUsers)
   .post('/founderquiz/creativityScore', controller.storeCreativityScore)
+  .post('/setBotFlowMode', controller.setBotFlowMode)
+  .get('/getBotFlowMode', controller.getBotFlowMode)
