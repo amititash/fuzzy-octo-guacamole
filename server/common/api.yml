@@ -407,6 +407,18 @@ paths:
 components:
   schemas:
 
+
+    FounderQuizBodySchema:
+      title: example
+      type: object
+      properties:
+        botFlowMode:
+          type: string
+          example: no_stress
+        emailId:
+          type: string
+          example: no_stress      
+
     setBotFlowModeSchema:
 
 
