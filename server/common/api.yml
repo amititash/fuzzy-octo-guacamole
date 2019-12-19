@@ -13,6 +13,15 @@ tags:
 paths:
 
 
+  /users/assignRandomBotFlowMode:
+    get:
+      tags:
+      - Examples
+      description: Fetch all examples
+      responses:
+        200:
+          description: Returns all examples
+          content: {}
 
 
   /users/getBotFlowMode:
@@ -419,13 +428,11 @@ components:
           type: string
           example: no_stress      
 
-    setBotFlowModeSchema:
 
 
     setBotFlowModeSchema:
       title: example
       required: 
-      - botFlowMode
       - emailId
       type: object
       properties:

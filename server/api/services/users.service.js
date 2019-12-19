@@ -1,11 +1,25 @@
 import l from '../../common/logger';
 import db from './users.db.service';
 import usersDbService from './users.db.service';
+const RandomBotFlowSetter = require('../../utils/randomBotFlow');
 
 
 class UsersService {
 
 
+  assignRandomBotFlowMode(payload){
+    return new Promise( async(resolve, reject) => {
+      let botFlowMode = "";
+      try {
+        botFlowMode = RandomBotFlowSetter();
+      }
+      catch(e){
+        console.log(e);
+        reject(e);
+      }
+      resolve(botFlowMode);
+    })
+  }
 
 
   getBotFlowMode(payload) {
@@ -37,13 +51,22 @@ class UsersService {
 
 
   setBotFlowMode(payload) {
+    // if no botflowmode is sent , this sets it randomly
     return new Promise( async(resolve, reject) => {
+      let botFlowMode = "";
       let criteria = {
         email : payload.emailId
       }
-      let updateObj = {
+      let updateObj = {};
+      if(payload.botFlowMode){
+        botFlowMode = payload.botFlowMode;
+      }
+      else {
+        botFlowMode = RandomBotFlowSetter();
+      }
+      updateObj = {
         "$set" : {
-          botFlowMode : payload.botFlowMode
+          botFlowMode
         }
       }
       let options = {
@@ -79,7 +102,32 @@ class UsersService {
   }
 
   createUser(objToSave) {
-    return db.insertOne(objToSave);
+    return new Promise( async(resolve, reject) => {
+      let data = {};
+      let criteria = {
+        email : objToSave.email
+      }
+      let projection = {
+
+      }
+      let options = {
+
+      }
+      try {
+        let user = await db.findOne(criteria, projection, options);
+        if(user){
+          reject(new Error("user already exists in the database"));
+        }
+        else {
+          data = await db.insertOne(objToSave)
+        }
+      }
+      catch(e){
+        console.log(e);
+        reject(e);
+      }
+      resolve(data);
+    })
   }
 
   storeCreativityScore(payload) {
@@ -103,7 +151,6 @@ class UsersService {
           // upsert : true
         }
         let updatedUserObj = await db.updateOne(criteria, update, options);
-        console.log("$$$$$$$$$$", updatedUserObj);
         resolve({
           average ,
           updatedUserObj

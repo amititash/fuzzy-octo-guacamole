@@ -3,6 +3,22 @@ import UsersService from '../../services/users.service';
 
 export class Controller {
 
+
+  async assignRandomBotFlowMode(req, res) {
+    let data = {};
+    try {
+      data.botFlowMode = await UsersService.assignRandomBotFlowMode();
+    }
+    catch(e) {
+      console.log(e);
+      res.send({
+        error : e.message
+      })
+    }
+    console.log("data return ", data);
+    res.send(data);
+  }
+
   async getBotFlowMode(req, res) {
     let data = {};
     try{
@@ -109,11 +125,16 @@ export class Controller {
   }
 
   createUser(req, res) {
-    UsersService.createUser(req.body).then(r =>
-      res
-        .status(201)
-        .json(r)
-    );
+    UsersService.createUser(req.body)
+      .then(r =>
+        res
+          .status(201)
+          .json(r)
+      )
+      .catch(e => {
+        res
+          .send({error : e.message})
+      })
   }
 
 

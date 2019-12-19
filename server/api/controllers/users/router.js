@@ -12,3 +12,4 @@ export default express
   .post('/founderquiz/creativityScore', controller.storeCreativityScore)
   .post('/setBotFlowMode', controller.setBotFlowMode)
   .get('/getBotFlowMode', controller.getBotFlowMode)
+  .get('/assignRandomBotFlowMode', controller.assignRandomBotFlowMode)
