@@ -100,10 +100,10 @@ class UsersService {
         }
         let options = {
           new : true,
-          upsert : true
+          // upsert : true
         }
         let updatedUserObj = await db.updateOne(criteria, update, options);
-        console.log(updatedUserObj);
+        console.log("$$$$$$$$$$", updatedUserObj);
         resolve({
           average ,
           updatedUserObj
