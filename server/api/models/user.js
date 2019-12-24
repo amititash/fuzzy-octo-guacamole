@@ -21,12 +21,11 @@ const UserSchema = new Schema({
     founderRole : { type : String},
     creativityScore : { type : Number },
     founderConnections  : [{type : String}],
-    bigFivePersonalityScores : {
-        Extraversion : Number,
-        Agreeableness : Number,
-        Conscientiousness : Number,
-        Neuroticism : Number,
-        Openness : Number
+    founderMotivationScores : {
+        motivation_money : Number,
+        motivation_challenge : Number,
+        motivation_advancement : Number,
+        motivation_society : Number
     },
     entrepreneurEfficacyScores : {
         Marketing : Number,
@@ -35,6 +34,16 @@ const UserSchema = new Schema({
         Risktaking : Number,
         Financialcontrol : Number
     },
+    demographicData : {
+        age : { type : Number },
+        gender : { type : String },
+        major : { type : String }
+    },
+    topSkill : { type : String },
+    coSkills : [ {
+        coSkill : String,
+        proficiency : Number    
+    }],
     botFlowMode : { type : String }
 });
 
