@@ -37,11 +37,11 @@ const KoSchema = new Schema({
     totalAddressableMarket : { type : Number },
     topCompetitors : [{ type : Schema.ObjectId}],
     totalCosts : [{type : Number}],
+    totalRevenue : [{type : Number}],
     totalCustomers : [{type : Number}],
     annualCosts : { type : Number},
     annualProfit : { type : Number},
     profitToRevenueRatio : { type : Number},
-    antiSkills : [{type : String}],
     topSkill : { type : String },
     coSkill : { type : String },
     bizcompApplication : { 
@@ -51,9 +51,15 @@ const KoSchema = new Schema({
         q4 : { type : String }
     },
     submissionDate : { type : Date },
-    submissionBotFlowMode : { type : String }
-    
-    
+    submissionBotFlowMode : { type : String },
+    businessModel : {
+        isSubscription : {type : Boolean, default : false},
+        unitPrice : { type : Number },
+        unitCost : { type : Number },
+        customerAcquisitionCost : { type : Number },
+        employees : [{ position : String , salary : Number }],
+        otherExpenses : [{ expenseType : String , cost : Number }],
+    },
 });
 
 KoSchema.index({

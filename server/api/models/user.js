@@ -44,6 +44,7 @@ const UserSchema = new Schema({
         coSkill : String,
         proficiency : Number    
     }],
+    antiSkills : [{type : String }],    
     botFlowMode : { type : String }
 });
 
