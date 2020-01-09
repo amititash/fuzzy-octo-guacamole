@@ -35,7 +35,7 @@ const UserSchema = new Schema({
         Financialcontrol : Number
     },
     demographicData : {
-        age : { type : Number },
+        age : { type : String },
         gender : { type : String },
         major : { type : String }
     },
