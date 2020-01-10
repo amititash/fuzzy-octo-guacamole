@@ -53,12 +53,17 @@ const KoSchema = new Schema({
     submissionDate : { type : Date },
     submissionBotFlowMode : { type : String },
     businessModel : {
-        isSubscription : {type : Boolean, default : false},
+        subscriptionService : {type : Boolean, default : false},
         unitPrice : { type : Number },
         unitCost : { type : Number },
         customerAcquisitionCost : { type : Number },
         employees : [{ position : String , salary : Number }],
         otherExpenses : [{ expenseType : String , cost : Number }],
+        annualCustomerAcquisitionCost : { type : Number },
+        annualProductionCost : { type : Number },
+        totalAnnualRevenue : { type : Number },
+        annualRevenueFromSubscription : { type : Number },
+        annualRevenueFromOtherSales : { type : Number }
     },
 });
 
