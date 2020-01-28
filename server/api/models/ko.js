@@ -63,7 +63,8 @@ const KoSchema = new Schema({
         annualProductionCost : { type : Number },
         totalAnnualRevenue : { type : Number },
         annualRevenueFromSubscription : { type : Number },
-        annualRevenueFromOtherSales : { type : Number }
+        annualRevenueFromOtherSales : { type : Number },
+        units : { type : Number }
     },
 });
 
