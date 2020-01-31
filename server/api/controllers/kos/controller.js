@@ -77,7 +77,9 @@ export class Controller {
           [`${requiredField}`] : 1,
           freshness_criteria : 1,
           fundabilityStars : 1,
-          customerSize : 1
+          customerSize : 1,
+          ideaName : 1,
+          ideaOwner : 1
         }
       }
     ];
@@ -124,7 +126,9 @@ export class Controller {
       }
     }
     let projection = {
-      ideaDescription : 1
+      ideaDescription : 1,
+      ideaName : 1,
+      ideaOwner : 1
     }
     let numbering = 1;
     let data = [];
