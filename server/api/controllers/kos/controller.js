@@ -143,9 +143,7 @@ export class Controller {
       }
     }
     let projection = {
-      ideaDescription : 1,
-      ideaName : 1,
-      ideaOwner : 1
+      
     }
     let numbering = 1;
     let data = [];
