@@ -1,10 +1,27 @@
 import KosService from '../../services/kos.service';
 import CompanyService from '../../services/companies.service'
 import { resolve } from 'path';
+import Axios from 'axios';
 
 export class Controller {
 
 
+  async getKoReport(req, res) {
+    let data = {};
+    let ko_id = req.query.ko_id;
+    let emailId = req.query.emailId;
+    let reportUrl = `${process.env.REPORT_API_URL}/reportHTML?ko_id=${ko_id}&emailId=${emailId}` ;
+    try {
+      let reportResponse = await Axios.get(reportUrl);
+      data.success = true;
+      data.html = reportResponse.data.html;
+    }
+    catch(e){
+      console.log(e);
+      res.send({ error : e.message})
+    }
+    res.send(data);
+  }
 
   async getAllSubmittedIdeas(req, res) {
     let submittedIdeas = [];

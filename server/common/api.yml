@@ -11,7 +11,7 @@ tags:
 - name: Specification
   description: The swagger API specification
 paths:
-
+  
 
   /users/assignRandomBotFlowMode:
     get:
@@ -180,6 +180,29 @@ paths:
           description: Returns all examples
           content: {}
 
+
+  /kos/report:
+    get:
+      tags:
+      - Examples
+      description: Fetch all examples
+      parameters:
+        - name: emailId
+          in: query
+          description: The id of the example to retrieve
+          required: true
+          schema:
+            type: string
+        - name: ko_id
+          in: query
+          description: The id of the example to retrieve
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Returns all examples
+          content: {}
 
   /kos/numberOfSubmittedIdeas:
     get:

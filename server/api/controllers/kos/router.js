@@ -14,3 +14,4 @@ export default express
   .get('/count', controller.getKoCount)
   .get('/numberOfSubmittedIdeas', controller.getSubmittedIdeasCount)
   .get('/allSubmittedIdeas', controller.getAllSubmittedIdeas)
+  .get('/report', controller.getKoReport)
