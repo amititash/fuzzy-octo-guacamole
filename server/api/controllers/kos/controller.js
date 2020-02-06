@@ -6,6 +6,49 @@ import Axios from 'axios';
 export class Controller {
 
 
+  async getKoByIdeaName(req, res) {
+    let criteria = {
+      ideaName : req.query.ideaName
+    }
+    KosService.getKo(criteria)
+      .then ( r => {
+        res
+          .status(200)
+          .json(r);
+      })
+      .catch ( e => {
+        res
+          .status(500)
+          .json( { error : e });
+      })
+  }
+
+  async sameIdeaNamePrefixKosCount(req, res) {
+    //return number of kos with idea name prefix  'my-idea' . 
+    let data = {};
+    let ideaOwner = req.query.emailId;
+    let regex = `${req.query.prefix}`;
+
+    let criteria = {
+      "ideaName" : {
+        "$regex" : regex
+      },
+      "ideaOwner" : ideaOwner
+    }
+    let count = 0;
+    try{
+      count = await KosService.countKo(criteria);
+      data.success = true;
+      data.count = count;
+      res.send(data);
+    }
+    catch(e){
+      console.log(e);
+      res.send({ error : e.message})
+    }
+  }
+
+
   async getKoReport(req, res) {
     let data = {};
     let ko_id = req.query.ko_id;

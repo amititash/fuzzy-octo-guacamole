@@ -1,9 +1,10 @@
 import * as express from 'express';
 import controller from './controller';
+import * as KoMiddlewares from '../../middlewares/ko/ko'; 
 
 export default express
   .Router()
-  .post('/', controller.createOrUpdateKo)
+  .post('/', KoMiddlewares.uniqueIdeaNameModifier,  controller.createOrUpdateKo)
   .get('/ko', controller.getKo)
   .get('/', controller.getAllKos)
   .delete('/', controller.deleteKo)
@@ -15,3 +16,5 @@ export default express
   .get('/numberOfSubmittedIdeas', controller.getSubmittedIdeasCount)
   .get('/allSubmittedIdeas', controller.getAllSubmittedIdeas)
   .get('/report', controller.getKoReport)
+  .get('/numCommonPrefixIdeaName' , controller.sameIdeaNamePrefixKosCount)
+  .get('/ideaName', controller.getKoByIdeaName)
