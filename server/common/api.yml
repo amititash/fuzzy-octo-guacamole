@@ -286,6 +286,28 @@ paths:
   
           
 
+  /kos/ideaNameSlug:
+    get:
+      tags:
+      - Examples
+      description: Fetch all examples
+      parameters:
+        - name: emailId
+          in: query
+          description: The id of the example to retrieve
+          required: true
+          schema:
+            type: string
+        - name: ideaNameSlug
+          in: query
+          description: The id of the example to retrieve
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Returns all examples
+          content: {}
   /kos/ideaName:
     get:
       tags:

@@ -1,7 +1,11 @@
 import  KoService from '../../services/kos.service';
 const crypto = require('crypto');
+const slugify = require('slugify');
 
-const uniqueIdeaNameModifier = async (req, res, next) => {
+const ideaNameSlugGenerator = async (req, res, next) => {
+    /**
+     * This middleware will do anything only if ideaName present in request. That is, we intend to update Idea name. 
+     */
     if(!req.body.ideaName){
         next();
     }
@@ -13,41 +17,28 @@ const uniqueIdeaNameModifier = async (req, res, next) => {
         let criteria = {};
 
         let ideaName = req.body.ideaName ;
+        let idea_slug = slugify(ideaName, '-');
+        console.log("slugified idea name", idea_slug);
+
+        criteria = {
+            "ideaNameSlug" : idea_slug,
+            "ideaOwner" : ideaOwner
+        }
+        try {
+            count = await KoService.countKo(criteria);
+        }
+        catch(e){
+            console.log(e);
+            next(e);
+        }
+        if(count){
+            idea_slug += `_${randomString}`;
+            idea_slug += `_${count}`   
+        }
         
-        if(ideaName === "my-idea"){
-            criteria = {
-                "ideaName" : ideaName,
-                "ideaOwner" : ideaOwner
-            }
-            try {
-                count = await KoService.countKo(criteria);
-            }
-            catch(e){
-                console.log(e);
-                next(e);
-            }
-            ideaName += `_${randomString}`;
-            ideaName += `_${count}`  
-        }
-        else {
-            criteria = {
-                "ideaName" : ideaName,
-                "ideaOwner" : ideaOwner
-            }
-            try {
-                count = await KoService.countKo(criteria);
-            }
-            catch(e){
-                console.log(e);
-                next(e);
-            }
-            if(count){
-                ideaName += `_${randomString}`;
-                ideaName += `_${count}`   
-            }
-        }
-        req.body.ideaName = ideaName;
-        console.log("idea name to be saved", ideaName);
+       
+        req.body.ideaNameSlug = idea_slug;
+        console.log("idea name slug to be saved", idea_slug);
         next()
     }
     
@@ -55,5 +46,5 @@ const uniqueIdeaNameModifier = async (req, res, next) => {
 
 
 module.exports = {
-    uniqueIdeaNameModifier
+    ideaNameSlugGenerator
 }

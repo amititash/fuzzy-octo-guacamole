@@ -4,6 +4,7 @@ const axios = require('axios');
 
 
 const KoSchema = new Schema({
+    ideaNameSlug : { type : String },
     ideaName : { type : String },
     ideaDescription : { type : String , required : true},
     ideaCategories : [ {type : String}],

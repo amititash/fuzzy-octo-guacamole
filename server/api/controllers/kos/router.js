@@ -4,7 +4,7 @@ import * as KoMiddlewares from '../../middlewares/ko/ko';
 
 export default express
   .Router()
-  .post('/', KoMiddlewares.uniqueIdeaNameModifier,  controller.createOrUpdateKo)
+  .post('/', KoMiddlewares.ideaNameSlugGenerator,  controller.createOrUpdateKo)
   .get('/ko', controller.getKo)
   .get('/', controller.getAllKos)
   .delete('/', controller.deleteKo)
@@ -18,3 +18,4 @@ export default express
   .get('/report', controller.getKoReport)
   .get('/numCommonPrefixIdeaName' , controller.sameIdeaNamePrefixKosCount)
   .get('/ideaName', controller.getKoByIdeaName)
+  .get('/ideaNameSlug', controller.getKoByIdeaNameSlug)

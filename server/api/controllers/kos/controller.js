@@ -6,9 +6,29 @@ import Axios from 'axios';
 export class Controller {
 
 
+
+  async getKoByIdeaNameSlug(req, res) {
+    let criteria = {
+      ideaNameSlug : req.query.ideaNameSlug,
+      ideaOwner : req.query.emailId
+    }
+    KosService.getKo(criteria)
+      .then ( r => {
+        res
+          .status(200)
+          .json(r);
+      })
+      .catch ( e => {
+        res
+          .status(500)
+          .json( { error : e });
+      })
+  }
+
   async getKoByIdeaName(req, res) {
     let criteria = {
-      ideaName : req.query.ideaName
+      ideaName : req.query.ideaName,
+      ideaOwner : req.query.emailId
     }
     KosService.getKo(criteria)
       .then ( r => {
