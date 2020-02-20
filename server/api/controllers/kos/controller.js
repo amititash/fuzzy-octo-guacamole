@@ -77,6 +77,7 @@ export class Controller {
     try {
       let reportResponse = await Axios.get(reportUrl);
       data.success = true;
+      data.processedReport = reportResponse.data.processedReport;
       data.html = reportResponse.data.html;
     }
     catch(e){
