@@ -19,3 +19,4 @@ export default express
   .get('/numCommonPrefixIdeaName' , controller.sameIdeaNamePrefixKosCount)
   .get('/ideaName', controller.getKoByIdeaName)
   .get('/ideaNameSlug', controller.getKoByIdeaNameSlug)
+  .get('/kosByPage', controller.getAllKosPaginated)

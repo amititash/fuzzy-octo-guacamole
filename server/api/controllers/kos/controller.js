@@ -6,6 +6,41 @@ import Axios from 'axios';
 export class Controller {
 
 
+  async getAllKosPaginated( req, res ) {
+    let criteria = {
+      ideaOwner : req.query.emailId
+    }
+
+    if(req.query.keyword) {
+      criteria["$text"] = {
+        "$search" : req.query.keyword
+      }
+    }
+    let projection = {
+      
+    }
+    let options = {
+      // "skip" : 0,
+      // "limit" : 1
+    }
+    let numbering = 1;
+    let data = [];
+    try {
+      let response = await KosService.getAllKos(criteria, projection, options);
+      response.forEach( element => {
+        element = element.toObject();
+        element.serial = numbering++;
+        data.push(element);
+      })
+      res.send(data);
+    }
+    catch(e) {
+      res
+        .status(500)
+        .json( { error : e.message });
+    }
+  }
+
 
   async getKoByIdeaNameSlug(req, res) {
     let criteria = {

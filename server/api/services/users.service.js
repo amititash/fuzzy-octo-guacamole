@@ -94,6 +94,7 @@ class UsersService {
   }
 
   getAllUsers(criteria, projection, options) {
+    // return db.findMany(criteria, projection).skip(options.page_size * (options.page_num - 1)).limit(options.page_size)
     return db.findMany(criteria, projection, options);
   }
 
