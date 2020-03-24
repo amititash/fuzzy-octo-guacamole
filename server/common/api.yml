@@ -496,7 +496,15 @@ paths:
           description: Returns all examples
           content: {}
 
-  
+  /admin/allData:
+    get:
+      tags:
+      - Examples
+      description: Fetch all examples
+      responses:
+        200:
+          description: Returns all examples
+          content: {}
 
     
   /examples:
