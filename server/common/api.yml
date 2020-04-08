@@ -124,6 +124,16 @@ paths:
           description: Returns all examples
           content: {}
   
+  /users/allUsers:
+    get:
+      tags:
+      - Examples
+      description: Fetch all examples
+      responses:
+        200:
+          description: Returns all examples
+          content: {}
+
   /users/byEmail:
     get:
       tags:

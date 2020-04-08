@@ -5,6 +5,7 @@ export default express
   .Router()
   .post('/', controller.createUser)
   .get('/', controller.getUser)
+  .get('/allUsers', controller.getAllUsers)
   .delete('/', controller.deleteUser)
   .patch('/', controller.updateUserByEmail)
   .get('/byEmail', controller.getUserByEmail)
